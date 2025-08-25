@@ -1,0 +1,75 @@
+{% load static %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}"> <div class="container my-5">
+  <h2 class="text-center fw-bold mb-5 text-secondary">Crear CV Profesional</h2>
+  <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+    {% csrf_token %}
+
+    <div class="card mb-4 shadow-lg border-0 rounded-3">
+      <div class="card-header bg-primary text-white fw-bold h5 py-3 rounded-top-3">
+        Datos Personales
+      </div>
+      <div class="card-body p-4">
+        <div class="row g-3">
+          <div class="col-md-6">{{ perfil_form.nombre.label_tag }} {{ perfil_form.nombre }}</div>
+          <div class="col-md-6">{{ perfil_form.ine.label_tag }} {{ perfil_form.ine }}</div>
+          <div class="col-md-6">{{ perfil_form.correo.label_tag }} {{ perfil_form.correo }}</div>
+          <div class="col-md-6">{{ perfil_form.contacto.label_tag }} {{ perfil_form.contacto }}</div>
+          <div class="col-12">{{ perfil_form.imagen.label_tag }} {{ perfil_form.imagen }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4 shadow-lg border-0 rounded-3">
+      <div class="card-header bg-success text-white fw-bold h5 py-3 rounded-top-3">
+        Experiencia Laboral
+      </div>
+      <div class="card-body p-4">
+        {{ exp_formset.management_form }}
+        {% for form in exp_formset %}
+          <div class="border rounded p-4 mb-3 bg-light experience-form">
+            <h6 class="text-success fw-bold">Experiencia #{{ forloop.counter }}</h6>
+            <div class="row g-3">
+              <div class="col-md-6">{{ form.empresa.label_tag }} {{ form.empresa }}</div>
+              <div class="col-md-6">{{ form.puesto.label_tag }} {{ form.puesto }}</div>
+              <div class="col-md-6">{{ form.fecha_ingreso.label_tag }} {{ form.fecha_ingreso }}</div>
+              <div class="col-md-6">{{ form.fecha_salida.label_tag }} {{ form.fecha_salida }}</div>
+            </div>
+            {% if form.instance.pk %}
+              {{ form.DELETE }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="card mb-4 shadow-lg border-0 rounded-3">
+      <div class="card-header bg-info text-white fw-bold h5 py-3 rounded-top-3">
+        Formación Académica
+      </div>
+      <div class="card-body p-4">
+        {{ edu_formset.management_form }}
+        {% for form in edu_formset %}
+          <div class="border rounded p-4 mb-3 bg-light education-form">
+            <h6 class="text-info fw-bold">Educación #{{ forloop.counter }}</h6>
+            <div class="row g-3">
+              <div class="col-md-6">{{ form.titulo.label_tag }} {{ form.titulo }}</div>
+              <div class="col-md-6">{{ form.institucion.label_tag }} {{ form.institucion }}</div>
+              <div class="col-md-6">{{ form.fecha_ingreso.label_tag }} {{ form.fecha_ingreso }}</div>
+              <div class="col-md-6">{{ form.fecha_salida.label_tag }} {{ form.fecha_salida }}</div>
+            </div>
+            {% if form.instance.pk %}
+              {{ form.DELETE }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <button type="submit" class="btn btn-lg btn-primary rounded-pill px-5">Generar CV</button>
+    </div>
+  </form>
+</div>
+
