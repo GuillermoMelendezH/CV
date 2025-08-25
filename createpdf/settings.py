@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(-a=8!johna5b8$3g%yl@6+d#d+7!smbk)o3okpuxuu@fy9h-^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['createCV.onrender.com']
 X_FRAME_OPTIONS = '*'
 
 
